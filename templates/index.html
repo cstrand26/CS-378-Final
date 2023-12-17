@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>CS-374 Final Project</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	</head>
+
+	<body>
+		<h1 class="header">
+		    CS-374 Final Project
+		</h1>
+	    <a href="https://www.fifa.com">
+		    <img class="invert-filter" id="logo" src="{{ url_for('static', filename='Fifa.png') }}">
+	    </a>
+		<p>
+	        <a href="teams">
+	            Click here to look at Teams
+            </a>
+        </p>
+		<p>
+	        <a href="scoreboard">
+	            Click here to look at Match Results
+            </a>
+        </p>
+		<p>
+	        <a href="tournaments">
+	            Click here to look at Tournaments
+            </a>
+        </p>
+		<!-- Search tab in teams page -->
+		<form action="{{ url_for('index') }}" method="Post">
+			<p>Search Organizations By:</p>
+			<p>
+				<label for="IO.Name">Organization Name:</label>
+				<input type="text" id="IO.Name" name="IO.Name">
+				<label for="P.Name">Parent Organization:</label>
+				<input type="text" id="IP.Name" name="IP.Name">
+			</p>
+			<input type="submit" value="Search">
+		</form>
+		<p>Organizations:</p>
+		<!-- End of Search tab-->
+		<table class="table-container">
+			<thead>
+				<th>Name</th> <th>Parent Organization</th> <th>Number of Teams</th> <th>Number of Tournaments</th>
+			</thead>
+			<tbody>
+				{% for result in response %}
+				<tr>
+					{% for key, value in result.items() %}
+						<td>{{ value }}</td>
+					{% endfor %}
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5VSCgNlSmTV2Yq5lB40Eaw" width="50%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+	    <p>
+	        <a class="footer" href="pete">Pete Tucker</a>
+	    </p>
+	    <p>
+	        <a class="footer" href="https://www.linkedin.com/in/christopher-strand-564185297/">Christopher Strand</a>
+	        <a class="footer" href="https://www.linkedin.com/in/jakhongir-ayupov/">Joha Ayupov</a>
+	    </p>
+	</body>
+</html>

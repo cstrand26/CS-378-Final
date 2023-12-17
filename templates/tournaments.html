@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tournaments</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <h1 class="header">
+        TOURNAMENTS
+    </h1>
+    <p>
+        <a href="/">
+            Click here to go to the Homepage
+        </a>
+    </p>
+    <p>
+        <a href="teams">
+            Click here to look at Teams
+        </a>
+    </p>
+    <p>
+        <a href="scoreboard">
+            Click here to look at Match Results
+        </a>
+    </p>
+    <form action="{{ url_for('tournaments') }}" method="Post">
+        <p>Search Tournaments By:</p>
+        <p>
+            <label for="TT.Year">Tournament Year:</label>
+            <input type="text" id="TT.Year" name="TT.Year">
+            <label for="TT.Name">Tournmanent Name:</label>
+            <input type="text" id="TT.Name" name="TT.Name">
+        </p>
+        <p>
+            <label for="TO.Name">Host Organization:</label>
+            <input type="text" id="TO.Name" name="TO.Name">
+            <label for="TH.Name">Host Team:</label>
+            <input type="text" id="TH.Name" name="TH.Name">
+            <label for="TW.Name">Winning Team:</label>
+            <input type="text" id="TW.Name" name="TW.Name">
+        </p>
+        <input type="submit" value="Search">
+    </form>
+    <p>Tournaments:</p>
+    <!-- End of Search tab-->
+    <table class="table-container">
+        <thead>
+            <th>Tournament Name</th> <th>Host Organization</th> <th>Host Team</th>
+            <th>Total Matches Played</th> <th>Winning Team</th>
+        </thead>
+        <tbody>
+            {% for result in response %}
+            <tr>
+                {% for key, value in result.items() %}
+                    <td>{{ value }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5VSCgNlSmTV2Yq5lB40Eaw" width="50%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</body>
+</html>

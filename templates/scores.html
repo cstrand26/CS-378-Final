@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Scores</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	</head>
+
+	<body>
+		<h1 class="header">
+		    Match Results
+		</h1>
+	    <p>
+	        <a href="/">
+	            Click here to go to the Homepage
+            </a>
+        </p>
+        <p>
+	        <a href="teams">
+	            Click here to look at Teams
+            </a>
+        </p>
+	    <p>
+	        <a href="tournaments">
+	            Click here to look at Tournaments
+            </a>
+        </p>
+		<form action="{{ url_for('scoreboard') }}" method="Post">
+			<p>Search Match Results By:</p>
+			<p>
+				<label for="MT.Year">Tournament Year:</label>
+				<input type="text" id="MT.Year" name="MT.Year">
+				<label for="MT.Name">Tournament Name:</label>
+				<input type="text" id="MT.Name" name="MT.Name">
+				<label for="MR.Name">Name of Round:</label>
+				<input type="text" id="MR.Name" name="MR.Name">
+				<label for="ME.Name">Team Name:</label>
+				<input type="text" id="ME.Name" name="ME.Name">
+			</p>
+			<p>
+				<label for="MO.Name">Host Organization:</label>
+				<input type="text" id="MO.Name" name="MO.Name">
+				<label for="MH.Name">Host Team:</label>
+				<input type="text" id="MH.Name" name="MH.Name">
+			</p>
+			<p>
+				<label for="E.Year">Year of Match:</label>
+				<input type="text" id="E.Year" name="ME.Year">
+				<label for="E.Month">Month of Match:</label>
+				<input type="text" id="E.Month" name="ME.Month">
+				<label for="E.Day">Day of Match:</label>
+				<input type="text" id="E.Day" name="ME.Day">
+			</p>
+			<input type="submit" value="Search">
+		</form>
+		<p>Match Results:</p>
+		<!-- End of Search tab-->
+		<table class="table-container">
+			<thead>
+				<th>Tournament</th> <th>Round</th> <th>Date</th> <th>Winning Team</th>
+				<th>Won by Penalty?</th> <th>Team</th> <th>Goals</th> <th>Goals</th>
+				<th>Team</th> <th>Host Organization</th> <th>Host Team</th>
+			</thead>
+			<tbody>
+				{% for result in response %}
+				<tr>
+					{% for key, value in result.items() %}
+						<td>{{ value }}</td>
+					{% endfor %}
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5VSCgNlSmTV2Yq5lB40Eaw" width="50%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+	</body>
+</html>

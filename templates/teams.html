@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Teams</title>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+	</head>
+
+	<body>
+	    <script>
+
+        </script>
+        <h1 class="header">
+		    TEAMS
+		</h1>
+        <p>
+	        <a href="/">
+	            Click here to go to the Homepage
+            </a>
+			
+        </p>
+		<p>
+	        <a href="scoreboard">
+	            Click here to look at Match Results
+            </a>
+        </p>
+	    <p>
+	        <a href="tournaments">
+	            Click here to look at Tournaments
+            </a>
+        </p>
+		<form action="{{ url_for('teams') }}" method="Post">
+			<p>Search Teams By:</p>
+			<p>
+				<label for="ET.Name">Team Name:</label>
+				<input type="text" id="ET.Name" name="ET.Name">
+				<label for="O.Name">Parent Organization:</label>
+				<input type="text" id="EO.Name" name ="EO.Name">
+			</p>
+			<input type="submit" value="Search">
+		</form>
+		<p>Teams:</p>
+		<!-- End of Search tab-->
+		<table class="table-container">
+			<thead>
+				<th>Country</th> <th>Official Fifa Name</th> <th>Nickname</th>
+				<th>Association</th> <th>Year Founded</th> <th>Parent Organization</th>
+				<th>Tournaments Particpated</th> <th>Tournaments Won</th> <th>Matches Played</th>
+				<th>Points Scored</th> <th>Losses</th> <th>Wins by Penalty</th>
+				<th>Wins</th> <th>Ties</th>
+			</thead>
+			<tbody>
+				{% for result in response %}
+				<tr>
+					{% for key, value in result.items() %}
+						<td>{{ value }}</td>
+					{% endfor %}
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<p>
+			<ul>
+				{% for team in teams %}
+					<li>
+						<strong>FIFA Code:</strong> {{ team.FIFA_Code or "N/A"}} <img src="/static/gif/{{team.FIFA_Code.lower()}}.gif" alt="" style="width: 16px; height: 11px;"> <br>
+						<strong>Country Name:</strong> {{ team.Country or "N/A"}}<br>
+						<strong>Official FIFA Name:</strong> {{ team.Official_FIFA_Name or "N/A" }}<br>
+						<strong>Nickname:</strong> {{ team.Nickname or "N/A" }}<br>
+						<strong>Association:</strong> {{ team.Association or "N/A" }}<br>
+						<strong>Organization Code:</strong> {{ team.Org_Code or "N/A" }}<br>
+						<strong>Year Founded:</strong> {{ team.Year_Founded or "N/A" }}<br>
+						<!-- Add a button for each team -->
+						<a href="https://en.wikipedia.org/wiki/{{ team.Country }}_national_football_team">
+							<button type="button">{{ team.Country }}</button>
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</p>
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5VSCgNlSmTV2Yq5lB40Eaw" width="50%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</html>
